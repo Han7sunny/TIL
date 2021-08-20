@@ -11,7 +11,7 @@ s에 'p'의 개수와 'y'의 개수를 비교해 같으면 True, 다르면 False
 문자열 s는 알파벳으로만 이루어져 있습니다.
 
 ### 입출력 예
-![ex4](https://user-images.githubusercontent.com/63505110/129740433-49b91388-e10a-4097-a28a-0f3a8b873057.GIF)
+<img src=https://user-images.githubusercontent.com/63505110/129740433-49b91388-e10a-4097-a28a-0f3a8b873057.GIF width = 200 height = 120>
 
 ### 입출력 예 설명
 입출력 예 #1          
@@ -21,13 +21,19 @@ s에 'p'의 개수와 'y'의 개수를 비교해 같으면 True, 다르면 False
 'p'의 개수 1개, 'y'의 개수 2개로 다르므로 false를 return 합니다.
 
 ### 풀이
-**upper(), lower() 함수는 원본을 변화시키지 않는 비파괴적 함수**            
-처음엔 그냥 s.lower()로 풀어서 틀림;;    
-```python
+**upper(), lower() 함수는 원본을 변화시키지 않는 비파괴적 함수**                    
++ 조건문
+    ```python
     def solution(s):
         ss = s.lower()
         if ss.count('p') == ss.count('y'):
             return True
         else:
             return False
-```
+    ```
++ 한 줄로 해결    
+    ```python
+    def solution(s):
+        return s.lower().count('p') == s.lower().count('y') # 'p', 'y' 모두 하나도 없을 경우 0 == 0으로 rue 반환
+
+    ```
