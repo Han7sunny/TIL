@@ -82,7 +82,7 @@
     [1 1 1 1]    
     [1 1 1 1]]    
                
-    [[1 1 1 1]     
+  > [[1 1 1 1]     
     [1 1 1 1]      
     [1 1 1 1]]]      
 + np.full()
@@ -161,3 +161,111 @@
       [[1 2 3]    
       [4 5 6]]    
     
+#### 데이터 생성 함수
+주어진 조건으로 데이터를 생성한 후 배열을 만드는 데이터 생성 함수 제공
++ np.linspace
+  ```python
+  a = np.linspace(0, 1, 5)# 0부터 1까지의 값을 5등분
+  pprint(a)
+  ```
+  > type: <class 'numpy.ndarray'>              
+    shape: (5,), dimension : 1, dtype : float64       
+    Array's Data:                
+    [0.   0.25 0.5  0.75 1.  ]          
++ np.arange
+  ```python
+  seq = np.arange(10) # 0-9의 값 할당
+  pprint(seq)
+  ```
+  > type: <class 'numpy.ndarray'>                 
+    shape: (10,), dimension : 1, dtype : int32        
+    Array's Data:           
+    [0 1 2 3 4 5 6 7 8 9]       
++ np.logspace()
+  ```python
+  a = np.logspace(0.1, 1, 20, endpoint=True) # 0.1부터 1까지 20등분, endpoint=True : 마지막 값 포함(1)
+  pprint(a)
+  ```
+  > type: <class 'numpy.ndarray'>                 
+    shape: (20,), dimension : 1, dtype : float64          
+    Array's Data:                 
+    [ 1.25892541  1.40400425  1.565802    1.74624535  1.94748304  2.1719114          
+    2.42220294  2.70133812  3.0126409   3.35981829  3.74700446  4.17881006          
+    4.66037703  5.19743987  5.79639395  6.46437163  7.2093272   8.04013161          
+    8.9666781  10.        ]         
+
+#### reshape
+생성된 배열의 차원과 크기를 변경          
+```python
+array1 = np.arange(10) # 0-9 array - 1차원
+array2 = array1.reshape(2,5) # 2행 5열
+# array2 = array1.reshape(-1,5) # 생략 가능 -1
+array3 = array1.reshape(5,2) # 5행 2열
+# array2 = array1.reshape(2,-1) # 생략 가능 -1
+# array3 = array1.reshape(4,3) # 이러면 안됨 데이터 10개 가지고 있으니까
+pprint(array1)
+pprint(array2)
+pprint(array3)
+```
+> type: <class 'numpy.ndarray'>             
+  shape: (10,), dimension : 1, dtype : int32         
+  Array's Data:         
+  [0 1 2 3 4 5 6 7 8 9]            
+  type: <class 'numpy.ndarray'>                 
+  shape: (2, 5), dimension : 2, dtype : int32         
+  Array's Data:              
+  [[0 1 2 3 4]             
+  [5 6 7 8 9]]                    
+  type: <class 'numpy.ndarray'>                       
+  shape: (5, 2), dimension : 2, dtype : int32          
+  Array's Data:            
+  [[0 1]            
+  [2 3]            
+  [4 5]            
+  [6 7]          
+  [8 9]]            
+  
+```python
+array1 = np.arange(8)
+array3d = array1.reshape((2,2,2))
+array3d_to_two = array3d.reshape(-1,1) # 3차원 -> 2차원으로 변경
+array2 = array1.reshape(-1,1) # 1차원 -> 2차원으로 변경
+pprint(array1)
+pprint(array3d)
+pprint(array3d_to_two)
+pprint(array2)
+```
+> type: <class 'numpy.ndarray'>              
+  shape: (8,), dimension : 1, dtype : int32        
+  Array's Data:           
+  [0 1 2 3 4 5 6 7]                 
+  type: <class 'numpy.ndarray'>        
+  shape: (2, 2, 2), dimension : 3, dtype : int32           
+  Array's Data:            
+  [[[0 1]             
+  [2 3]]         
+                   
+> [[4 5]           
+  [6 7]]]             
+  type: <class 'numpy.ndarray'>            
+  shape: (8, 1), dimension : 2, dtype : int32       
+  Array's Data:          
+  [[0]         
+  [1]     
+  [2]     
+  [3]    
+  [4]     
+  [5]      
+  [6]      
+  [7]]      
+  type: <class 'numpy.ndarray'>              
+  shape: (8, 1), dimension : 2, dtype : int32     
+  Array's Data:     
+  [[0]     
+  [1]     
+  [2]     
+  [3]     
+  [4]     
+  [5]      
+  [6]      
+  [7]]     
