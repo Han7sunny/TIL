@@ -1,6 +1,6 @@
-# N과 M(1)
+# N과 M (1)
 #### 백준 15649번
-[백준 | N과 M(1)](https://www.acmicpc.net/problem/15649)
+[백준 | N과 M (1)](https://www.acmicpc.net/problem/15649)
 ### 풀이
 ```python
 from sys import stdin
