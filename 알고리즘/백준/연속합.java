@@ -20,7 +20,7 @@ public class Main {
 			if(i == 0)
 				sum[i] = num[i];
 			else
-				sum[i] = Math.max(sum[i-1] + num[i], num[i]);
+				sum[i] = Math.max(sum[i-1] + num[i], num[i]); // 이전까지의 합에 현재값을 합한 것이 현재값보다 작으면 현재값부터 다시 시작
 			answer = answer < sum[i] ? sum[i] : answer;
 		}
 		br.close();
