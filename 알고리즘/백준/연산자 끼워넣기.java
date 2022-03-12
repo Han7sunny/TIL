@@ -58,3 +58,67 @@ public class Main {
 		bw.close();
 	}
 }
+
+// 다른 풀이
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+	static int N;
+	static int[] number;
+	static int[] op = new int[4];
+	static int min = Integer.MAX_VALUE;
+	static int max = Integer.MIN_VALUE;
+	public static void cal(int sum, int idx) {
+		if(idx == N) {
+			min = Math.min(min, sum);
+			max = Math.max(max, sum);
+			return;
+		}
+		for(int i = 0; i < op.length; i++) {
+			if(op[i] > 0) {
+				op[i]--;
+				switch(i) {
+					case 0:
+						cal(sum + number[idx], idx+1);
+						break;
+					case 1:
+						cal(sum - number[idx], idx+1);
+						break;
+					case 2:
+						cal(sum * number[idx], idx+1);
+						break;
+					case 3:
+						cal(sum / number[idx], idx+1);
+						break;
+				}
+				op[i]++;
+			}
+		}
+	}
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		N = Integer.parseInt(br.readLine());
+		number = new int[N];
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		for(int i = 0; i < N; i++) {
+			number[i] = Integer.parseInt(st.nextToken());
+		}
+		st = new StringTokenizer(br.readLine());
+		for(int i = 0; i < 4; i++) {
+			op[i] = Integer.parseInt(st.nextToken());
+		}
+		cal(number[0],1); // 첫번째 값 넣어주기
+		br.close();
+		bw.write(max+"\n");
+		bw.write(min+"\n");
+		bw.flush();
+		bw.close();
+	}
+}
