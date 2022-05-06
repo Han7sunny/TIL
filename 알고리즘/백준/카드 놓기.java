@@ -12,7 +12,7 @@ public class Main { // 18115
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));	
-    Deque<Integer> d = new ArrayDeque<>();
+    		Deque<Integer> d = new ArrayDeque<>();
 		int n = Integer.parseInt(br.readLine());
 		String[] skills = br.readLine().split(" ");
 
@@ -32,7 +32,7 @@ public class Main { // 18115
 			}
 		}
 
-    StringBuilder sb = new StringBuilder();
+    		StringBuilder sb = new StringBuilder();
 		while(!d.isEmpty()) {
 			sb.append(d.pollFirst());
 			if(!d.isEmpty())
