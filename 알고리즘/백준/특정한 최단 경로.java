@@ -11,22 +11,24 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 public class Main {
 	static Map<Integer,Map<Integer,Integer>> node;
+	static final int INF = 200000000;
 	public static int shortWay(int start, int end) {
 		PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[1] - b[1]);
 		boolean[] visited = new boolean[node.size() + 1];
 		int[] dist = new int[node.size() + 1];
-		Arrays.fill(dist, Integer.MAX_VALUE);
+		Arrays.fill(dist, INF);
+		dist[start] = 0;
+		
 		pq.add(new int[] {start,0});
 		while(!pq.isEmpty()) {
 			int[] now = pq.poll();
-			
+
 			if(!visited[now[0]]) {
 				visited[now[0]] = true;
 				for(Entry<Integer,Integer> next : node.get(now[0]).entrySet()) {
-					if(dist[next.getKey()] > now[1] + next.getValue()) {
+					if(dist[next.getKey()] > now[1] + next.getValue() && !visited[next.getKey()]) {
 						dist[next.getKey()] = now[1] + next.getValue();
-						visited[next.getKey()] = true;
-						pq.add(new int[] {next.getKey(), now[1] + next.getValue()});
+						pq.add(new int[] {next.getKey(), dist[next.getKey()]});
 					}
 				}
 			}
@@ -56,21 +58,21 @@ public class Main {
 		int u = Integer.parseInt(st.nextToken());
 		int v = Integer.parseInt(st.nextToken());
 		
-		int uToV = 0;
+		long uToV = 0;
 		uToV += shortWay(1,u);
 		uToV += shortWay(u,v);
-		uToV += shortWay(v,n);
+		uToV += shortWay(v,n);		
 		
-		int vToU = 0;
+		long vToU = 0;
 		vToU += shortWay(1,v);
 		vToU += shortWay(v,u);
 		vToU += shortWay(u,n);
 		
-		int answer = Math.min(uToV, vToU);
-		if(answer >= Integer.MAX_VALUE)
+		long answer = Math.min(uToV, vToU);
+		if(answer >= INF)
 			answer = -1;
 		br.close();
-		bw.write(Integer.toString(answer));
+		bw.write(answer + "\n");
 		bw.flush();
 		bw.close();
 	}
