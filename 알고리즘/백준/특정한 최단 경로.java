@@ -9,9 +9,11 @@ import java.util.StringTokenizer;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
-public class Main {
+public class Main { // 1504
+	// u, v 두 정점 반드시 통과해야한다 -> 경우의 수를 쪼개서 구하기
+	// 1 -> u -> v -> n과 1 -> v -> u -> n 구하고 둘 중 최솟값 출력
 	static Map<Integer,Map<Integer,Integer>> node;
-	static final int INF = 200000000;
+	static final int INF = 200000000; // 200000 * 1000
 	public static int shortWay(int start, int end) {
 		PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[1] - b[1]);
 		boolean[] visited = new boolean[node.size() + 1];
