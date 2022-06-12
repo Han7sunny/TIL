@@ -7,10 +7,8 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {  // 1197
+	// 크루스칼 
 	static int[] parent;
-	public static void mst() {
-		
-	}
 	public static int find(int x) {
 		if(parent[x] == x)
 			return x;
