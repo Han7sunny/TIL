@@ -29,7 +29,6 @@ public class Solution_1208_Flatten {
 				dump--;
 				Arrays.sort(box);
 			}
-
 			bw.write("#" + test_case + " " + (box[99] - box[0]) + "\n");
 		}
 		br.close();
