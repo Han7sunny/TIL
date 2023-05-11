@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-//	BOJ_1068 11704kb 76ms
+//	BOJ_1068 11704kb 76ms 
 public class Main_1068 {
-
+ 
 	static int removeNode;
 	static int root;
 	static Node[] nodeList;
