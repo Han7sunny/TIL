@@ -1,0 +1,101 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+//	BOJ_16947 165652kb 888ms
+public class Main_16947 {	
+	
+	static Map<Integer, List<Integer>> station;
+	static Queue<Integer> list;
+	static int[] dist;
+	static boolean[] visited;
+	static boolean[] cycle;
+	
+	public static void calculateDist() {
+		while(!list.isEmpty()) {
+			int num = list.poll();
+			for (int next : station.get(num)) {
+				if(!cycle[next] && dist[next] == 0) {
+					dist[next] = dist[num] + 1;
+					list.offer(next);
+				}
+			}
+		}
+	}
+	
+	public static void checkCycle(int start, int prev, int now) {
+		
+		visited[now] = true;
+		
+		for (int next : station.get(now)) {
+			
+			if (start == next && start != prev ) {
+				cycle[next] = true;	
+				list.offer(next);
+				return;
+			}
+		
+			if (!visited[next])
+				checkCycle(start, now, next);
+		}
+		
+	}
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder answer = new StringBuilder();
+		StringTokenizer st;
+
+		int N = Integer.parseInt(br.readLine());
+
+		station = new HashMap<>();
+		dist = new int[N + 1];
+		cycle = new boolean[N + 1]; // 순환선 여부
+		list = new ArrayDeque<>();
+		
+		for (int i = 1; i <= N; i++) {
+			station.put(i, new ArrayList<>());
+		}
+		
+		for (int i = 0; i < N; i++) {
+			// 양방향 그래프
+			st = new StringTokenizer(br.readLine());
+			int s = Integer.parseInt(st.nextToken());
+			int e = Integer.parseInt(st.nextToken());
+			
+			station.get(s).add(e);
+			station.get(e).add(s);
+		}
+		
+		for (int start = 1; start <= N; start++) {
+			visited = new boolean[N + 1];
+			checkCycle(start, start, start); // 각 역과 연결된 역 순찰하며 순환선인지 확인
+		}
+		
+		calculateDist();	//	각 역과 순환역 사이의 거리 계산
+
+		for (int i = 1; i <= N; i++) {
+			if (cycle[i]) 
+				answer.append("0 ");
+			else 
+				answer.append(dist[i]).append(" ");
+		}
+
+		br.close();
+		bw.write(answer.toString());
+		bw.flush();
+		bw.close();
+	}
+
+}
