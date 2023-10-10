@@ -37,6 +37,7 @@ public class Main_1261 {
 		int M = Integer.parseInt(st.nextToken()); // 미로의 가로 크기
 		int N = Integer.parseInt(st.nextToken()); // 미로의 세로 길이
 
+		int answer = 0;
 		char[][] maze = new char[N][M];
 		boolean[][] visited = new boolean[N][M];
 		int[][] move = { { 0, -1 }, { 0, 1 }, { -1, 0 }, { 1, 0 } };
@@ -48,7 +49,6 @@ public class Main_1261 {
 
 		visited[0][0] = true;
 		q.add(new Loc(0, 0, 0));
-		int answer = 0;
 
 		while (!q.isEmpty()) {
 
@@ -58,7 +58,7 @@ public class Main_1261 {
 				answer = now.count;
 				break;
 			}
-						
+			
 			for (int i = 0; i < 4; i++) {
 				
 				int nx = now.x + move[i][0];
@@ -67,33 +67,14 @@ public class Main_1261 {
 				if (nx < 0 || ny < 0 || nx >= N || ny >= M || visited[nx][ny])
 					continue;
 				
-				// 빈 방
 				visited[nx][ny] = true;
 				
 				if(maze[nx][ny] == '0')
 					q.add(new Loc(nx, ny, now.count));
 				else
 					q.add(new Loc(nx, ny, now.count + 1));
-//				emptyCnt++;
 
 			}
-
-			// 빈 방 없으면
-//			if (emptyCnt == 0) {
-//				for (int i = 0; i < 4; i++) {
-//
-//					int nx = now.x + move[i][0];
-//					int ny = now.y + move[i][1];
-//
-//					if (nx < 0 || ny < 0 || nx >= N || ny >= M || visited[nx][ny] || maze[nx][ny] == '0')
-//						continue;
-//
-//					// 벽 부수기
-//					visited[nx][ny] = true;
-//					q.add(new Loc(nx, ny, now.count + 1));
-//
-//				}
-//			}
 
 		}
 
